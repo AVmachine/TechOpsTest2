@@ -1,0 +1,36 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">{{ userType }}</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list class="matnavlist">
+
+        <div *ngIf="Object.keys(userList).length">
+
+        </div>
+
+          <div *ngFor="let type of currentItems | keyvalue">
+              <div >{{Object.keys(this.userList[this.userType]).length > 1 ? type.key : null}}</div>
+            <div *ngFor="let item of type.value">
+              <a mat-list-item>{{item}}</a>
+              <mat-divider></mat-divider>
+            </div>
+
+          </div>
+
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="matnavlist">
+      @for (content of fillerContent; track content) {
+        <p>{{content}}</p>
+      }
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
